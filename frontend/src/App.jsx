@@ -40,7 +40,7 @@ export default function App() {
             type="text"
             value={query}
             onChange={e => setQuery(e.target.value)}
-            placeholder="Ask about marketing blogs..."
+            placeholder="Ex: Best ad copy for summer sale campaigns"
             className="input"
             required
           />
