@@ -10,8 +10,8 @@ from dotenv import load_dotenv
 # Updated imports for LangChain v0.3.x and Pinecone
 from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from pinecone import Pinecone, ServerlessSpec
+from langchain_huggingface import HuggingFaceEmbeddings
+from pinecone import Pinecone
 from langchain_pinecone import PineconeVectorStore
 from langchain_openai import ChatOpenAI
 from langchain.chains import create_retrieval_chain
@@ -48,7 +48,7 @@ def load_pdf_file(data):
 	return documents
 
 def filter_to_minimal_docs(docs):
-	from langchain.schema import Document
+	from langchain_core.documents import Document
 	minimal_docs = []
 	for doc in docs:
 		src = doc.metadata.get("source")
@@ -84,8 +84,7 @@ if INDEX_NAME not in pc.list_indexes().names():
 	pc.create_index(
 		name=INDEX_NAME,
 		dimension=384,
-		metric="cosine",
-		spec=ServerlessSpec(cloud="aws", region="us-east-1")
+		metric="cosine"
 	)
 index = pc.Index(INDEX_NAME)
 
