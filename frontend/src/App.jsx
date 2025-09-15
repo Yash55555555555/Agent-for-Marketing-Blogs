@@ -14,7 +14,7 @@ export default function App() {
     setError('');
     setResponse('');
     try {
-      const res = await axios.post('http://localhost:8000/api/query', { query });
+      const res = await axios.post('/api/query', { query });
       setResponse(res.data.response || 'No response received.');
     } catch (err) {
       setError('Error fetching response.');
