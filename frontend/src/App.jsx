@@ -52,7 +52,11 @@ export default function App() {
         {response && (
           <div className="response">
             <h2>Response</h2>
-            <p>{response}</p>
+            <ul>
+              {response.split(/\d+\./).filter(item => item.trim()).map((point, index) => (
+                <li key={index}>{point.trim()}</li>
+              ))}
+            </ul>
           </div>
         )}
         <BlogCards />
